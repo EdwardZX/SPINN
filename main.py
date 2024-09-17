@@ -72,23 +72,7 @@ config = parser.parse_args()
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     is_train = True
-    alpha = [1.0] #[0,2.0-5000 OK]
-    # alpha = [0.1,0.75,1.0]  # [0,2.0-5000 OK]
-    # # alpha = np.linspace(0.05,2,2).tolist()
-    Dt = [1]
     filename_tags = ['var','vel']
-    # save_name = 'noise-var-test-noise-1-2'
-    # save_name = 'alpha' + '-'.join(list(map(str, alpha))) + '_Dt' + '-'.join(list(map(str, Dt)))
-    # config.filename = None
-    # num = 5000
-    # T = 100
-    # x, _ = generate_x(alpha=alpha, Dt=Dt, time_span=num * T, seed=config.seed)
-    # X = x.reshape(num * len(alpha) * len(Dt), T, 2)
-    # X_1 = (1 * np.random.randn(num * len(alpha) * len(Dt), T, 2)) ** 2
-    # X_2 = (0.5 * np.random.randn(num * len(alpha) * len(Dt), T, 2))**2
-    # X = np.concatenate([X_1[:2000//2], X_2[2000//2:]], axis=0)
-    # config.beta_obs = 0
-
     if config.filename is not None:
         # searching training number
         saved_name = '-'.join([config.filename,'noise',str(config.noise_adding)])
@@ -110,8 +94,6 @@ if __name__ == '__main__':
     config.model_name = save_name + '.pth'
     config.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-    # train_dataset, test_dataset = generate_dataset_torch(DatasetTracks(X,config=config,sample_rate=1.))
-    # train_dataset, test_dataset = generate_dataset_torch(TensorDataset(torch.from_numpy(X).type(dtype=torch.float)))
     train_dataset, test_dataset = generate_dataset_torch(
                                     merge_datasets(filepath='./data',
                                                 filenames=[config.filename + '_annotation.txt'],
@@ -119,7 +101,6 @@ if __name__ == '__main__':
 
     if is_train:
         model = train(train_datasets=train_dataset, config=config, test_datasets=test_dataset)
-        # model = train(train_datasets=train_dataset, config=config, test_datasets=test_dataset, L2=True)
 
     else:
         model = JumpSDEsTransformer(in_dim=config.in_dim, out_dim=config.in_dim, encoding_len=config.encoder_length,
