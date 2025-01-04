@@ -30,13 +30,13 @@ git clone https://github.com/EdwardZX/SPINN.git
 
 Install PyTorch and Related Packages:
 
-```console
+```
 pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu118
 ```
 
 Install other dependencies (NumPy, Matplotlib, Pandas, etc.):
 
-```console
+```
 pip install -r requirements.txt
 ```
 
@@ -83,14 +83,14 @@ The `run_SPINN.py` script processes trajectory data using SPINN. It can handle l
 
 To process trajectories that all are longer than 100 frames and save the output in CSV format, use the following command:
 
-```console
+```
 python run_SPINN.py --filename inputData --save_csv
 ```
 
 **For shorter trajectories**
 If your tracks are shorter than 100 frames, use the `csv_short` format. This will utilize a data pool to generate pseudo-trajectories while preserving the original microdynamics:
 
-```console
+```
 python run_SPINN.py --filename inputData --data_format csv_short --save_csv
 ```
 
@@ -98,7 +98,7 @@ python run_SPINN.py --filename inputData --data_format csv_short --save_csv
 
 When you run the `run_SPINN.py` script, the output files are organized in the following directory structure:
 
-```console
+```
 model_dir/
 ├── inputData/
 │   ├── trackers1-SPINNResults.csv
@@ -151,7 +151,7 @@ Two types of track segments are generated from the raw trajectories:
 **Usage**
 For training, SPINN uses only the regular tracks (-tracks) data, while both regular and head tracks are used during visualization to provide comprehensive trajectory analysis. 
 
-```console
+```
 data/
 ├── inputData
 │   ├── normalized/ # Contains normalization information for each trajectory
@@ -184,7 +184,7 @@ data/
 
 SPINN utilizes the inputData folder for the complete dataset. The data in `inputData` is collectively loaded and later split into training and test sets during the training process. The test set is used for preview and evaluation. The file `inputData_annotation.txt` specifies the location of the NPY files (e.g., `./data/inputData/tracks1.npy`). Sample mode directory structure:
 
-```console
+```
 data/
 ├── inputData
 │   ├── tracks1.npy
@@ -201,7 +201,7 @@ data/
 
 To process trajectories, use the following command: 
 
-```console
+```
 python run_SPINN.py --filename inputData --data_format npy --save_micro all --save_csv
 ```
 
@@ -246,7 +246,7 @@ Other Parameters:
 
 To process trajectories, use the following command: 
 
-```console
+```
 python run_SPINN.py --filename inputData --data_format npy --save_micro sample
 ```
 
@@ -266,7 +266,7 @@ The trained neural network extracts macroscopic statistical features through tra
 
 To process trajectories generation in all mode, use the following command: 
 
-```console
+```
 python run_SPINN.py --filename inputData --data_format npy --save_micro all --gen_tracks --gen_tracks_num 20
 ```
 
@@ -276,7 +276,7 @@ python run_SPINN.py --filename inputData --data_format npy --save_micro all --ge
 
 To process trajectories generation in sample mode, use the following command: 
 
-```console
+```
 python run_SPINN.py --filename inputData --data_format npy --save_micro sample --gen_tracks --gen_tracks_num 20
 ```
 
@@ -299,7 +299,7 @@ x_gen = np.load('./model_dir/'+filename +'-gen/memmap_gen/x0_gen.npy',
 
 To visualize predicted trajectories, use the following command:
 
-```console
+```
 python run_SPINN.py --filename inputData --sample_nums 1
 ```
 
