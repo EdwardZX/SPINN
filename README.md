@@ -130,7 +130,7 @@ id_tracks,frame,X,Y,Y1X,Y1Y,VX,VY,VarX,VarY
 
 ### Algorithms Overview
 
-![algorithms_overview_github v6 copy](./assets/algorithms_overview_github.pdf)
+![algorithms_overview_github v6 copy](./assets/algorithms_overview_github.png)
 
 SPINN uses history to analyze particle trajectory data through a Transformer-GRU architecture to extract the underlying motion dynamics, which embeds the trajectory in a high-dimensional space using multi-head attention to capture temporal dependencies. This embedded representation feeds into a GRU decoder that produces two main outputs: reconstruction of current positions and prediction of next frame positions. Raw drift term is calculated as (pred\_{t+1} - obs_t), and raw diffusion term is calculated as (obs\_{t+1} - pred\_{t+1})². These raw values are then trained through additional separate neural networks to produce more continuous drift and diffusion time series.
 
